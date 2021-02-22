@@ -1,0 +1,24 @@
+{
+  "name": "mybudget-api",
+  "version": "1.0.0",
+  "description": "A personal budget management REST API built in Nodejs, Express, Sequelize",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n-caro/mybudget-backend.git"
+  },
+  "author": "Nicolas Caro (n-caro)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n-caro/mybudget-backend/issues"
+  },
+  "homepage": "https://github.com/n-caro/mybudget-backend#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
