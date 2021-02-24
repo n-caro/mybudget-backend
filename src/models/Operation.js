@@ -10,15 +10,15 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(140),
         allowNull: true,
       },
-      operationCategoryID: {
+      operationCategoryId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      operationTypeID: {
+      operationTypeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      userID: {
+      userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -36,14 +36,12 @@ module.exports = function (sequelize, DataTypes) {
 
   Operation.associate = function (models) {
     Operation.belongsTo(models.OperationType, {
-      foreignKey: "operationTypeID",
-      as: "operationType",
+      foreignKey: "operationTypeId",
     });
     Operation.belongsTo(models.OperationCategory, {
-      foreignKey: "operationCategoryID",
-      as: "operationCategory",
+      foreignKey: "operationCategoryId",
     });
-    Operation.belongsTo(models.User, { foreignKey: "userID", as: "user" });
+    Operation.belongsTo(models.User, { foreignKey: "userId" });
   };
 
   return Operation;

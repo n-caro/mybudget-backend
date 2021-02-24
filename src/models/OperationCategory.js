@@ -3,11 +3,11 @@ module.exports = function (sequelize, DataTypes) {
   const OperationCategory = sequelize.define(
     "OperationCategory",
     {
-      Name: {
+      name: {
         type: DataTypes.STRING(40),
         allowNull: false,
       },
-      OperationTypeID: {
+      operationTypeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -18,8 +18,7 @@ module.exports = function (sequelize, DataTypes) {
   );
   OperationCategory.associate = function (models) {
     OperationCategory.belongsTo(models.OperationType, {
-      foreignKey: "OperationTypeID",
-      as: "OperationType",
+      foreignKey: "OperationTypeId",
     });
     OperationCategory.hasMany(models.Operation, { as: "Operations" });
   };
