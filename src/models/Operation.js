@@ -2,23 +2,23 @@ module.exports = function (sequelize, DataTypes) {
   const Operation = sequelize.define(
     "Operation",
     {
-      Amount: {
+      amount: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
       },
-      Note: {
+      note: {
         type: DataTypes.STRING(140),
         allowNull: true,
       },
-      OperationCategoryID: {
+      operationCategoryID: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      OperationTypeID: {
+      operationTypeID: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      UserID: {
+      userID: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -32,14 +32,14 @@ module.exports = function (sequelize, DataTypes) {
 
   Operation.associate = function (models) {
     Operation.belongsTo(models.OperationType, {
-      foreignKey: "OperationTypeID",
-      as: "OperationType",
+      foreignKey: "operationTypeID",
+      as: "operationType",
     });
     Operation.belongsTo(models.OperationCategory, {
-      foreignKey: "OperationCategoryID",
-      as: "OperationCategory",
+      foreignKey: "operationCategoryID",
+      as: "operationCategory",
     });
-    Operation.belongsTo(models.User, { foreignKey: "UserID", as: "User" });
+    Operation.belongsTo(models.User, { foreignKey: "userID", as: "user" });
   };
 
   return Operation;
