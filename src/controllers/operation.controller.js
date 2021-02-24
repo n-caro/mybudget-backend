@@ -10,6 +10,7 @@ class OperationController {
     try {
       const operation = {
         amount: parseFloat(body.amount),
+        dateOperation: body.dateOperation,
         note: body.note,
         operationCategoryID: parseInt(body.operationCategoryID),
         operationTypeID: parseInt(body.operationTypeID),
@@ -27,6 +28,7 @@ class OperationController {
       });
     }
   }
+
 }
 
 module.exports = OperationController;

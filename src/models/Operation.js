@@ -22,10 +22,14 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      dateOperation: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
     },
     {
       timestamps: true,
-      createdAt: "CreatedAt",
+      createdAt: false,
       UpdatedAt: "UpdatedAt",
     }
   );
