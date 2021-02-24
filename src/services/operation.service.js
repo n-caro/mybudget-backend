@@ -1,22 +1,32 @@
 _operationRepository = null;
-
 class OperationService {
   constructor({ OperationRepository }) {
     _operationRepository = OperationRepository;
   }
 
-  async createOperation(operation){
+  async createOperation(operation) {
     return await _operationRepository.createOperation(operation);
-  };
+  }
 
-  async getAll(userID, limit, page){
-    const totals = await _operationRepository.countAllOperations(userID);
-    const operations = await _operationRepository.getAll(userID, limit, page)
+  async getAll(userId, limit, page) {
+    const query = { userId };
+    const totals = await _operationRepository.countOperations(query);
+    const operations = await _operationRepository.getAll(query, limit, page);
     return {
       totals,
-      operations
-    }
-  };
+      operations,
+    };
+  }
+
+  async getAllByOperationType(typeId, userId, limit, page) {
+    const query = { userId, operationTypeId: typeId };
+    const totals = await _operationRepository.countOperations(query);
+    const operations = await _operationRepository.getAll(query, limit, page);
+    return {
+      totals,
+      operations,
+    };
+  }
 }
 
 module.exports = OperationService;
