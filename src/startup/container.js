@@ -3,15 +3,14 @@ const { createContainer, asValue, asClass, asFunction } = require("awilix");
 const config = require("../config");
 const app = require(".");
 // Services
-const { AuthService } = require("../services");
+const { AuthService, OperationService } = require("../services");
 // Controllers
-const { AuthController } = require("../controllers");
+const { AuthController, OperationController } = require("../controllers");
 // Routes
 const Routes = require("../routes");
-const { AuthRoutes } = require("../routes/index.routes");
+const { AuthRoutes, OperationRoutes } = require("../routes/index.routes");
 // Repositories
-const { UserRepository } = require('../repositories')
-
+const { UserRepository, OperationRepository } = require("../repositories");
 
 // create container
 const container = createContainer();
@@ -22,19 +21,23 @@ container.register({
 // Register: Routes
 container.register({
   router: asFunction(Routes).singleton(),
-  AuthRoutes: asFunction(AuthRoutes).singleton()
+  AuthRoutes: asFunction(AuthRoutes).singleton(),
+  OperationRoutes: asFunction(OperationRoutes).singleton(),
 });
 // Register: Services
 container.register({
-  AuthService: asClass(AuthService).singleton()
+  AuthService: asClass(AuthService).singleton(),
+  OperationService: asClass(OperationService).singleton()
 });
 // Register: Controllers
 container.register({
-  AuthController: asClass(AuthController.bind(AuthController)).singleton()
+  AuthController: asClass(AuthController.bind(AuthController)).singleton(),
+  OperationController: asClass(OperationController.bind(OperationController)).singleton(),
 });
 // Register: Repositories
 container.register({
-  UserRepository: asClass(UserRepository).singleton()
+  UserRepository: asClass(UserRepository).singleton(),
+  OperationRepository: asClass(OperationRepository).singleton(),
 });
 
 module.exports = container;
