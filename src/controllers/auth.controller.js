@@ -20,6 +20,22 @@ class AuthController {
       });
     }
   }
+
+  async signIn(req, res) {
+    const { body } = req;
+    try {
+      const signInResponse = await _authService.signIn(body);
+      return res.status(200).json(signInResponse);
+    } catch (error) {
+      //TODO: Handle exceptions with middleware
+      const status = error.status || 500;
+      const message = error.message || "Internal server error";
+      return res.status(status).json({
+        status,
+        message,
+      });
+    }
+  }
 }
 
 module.exports = AuthController;

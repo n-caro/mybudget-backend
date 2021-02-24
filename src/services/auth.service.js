@@ -1,4 +1,5 @@
 _userRepository = null;
+const { JWTsignToken } = require("../helpers");
 
 class AuthService {
   constructor({ UserRepository }) {
@@ -14,6 +15,20 @@ class AuthService {
       throw error;
     }
     return await _userRepository.registerUser(User);
+  }
+
+  async signIn(user) {
+    const { email, password } = user;
+    const userDB = await _userRepository.getByEmail(email);
+    if (!userDB || (userDB && !userDB.validPassword(password))) {
+      const error = new Error("Invalid email or password.");
+      error.status = 401;
+      throw error;
+    }
+    return {
+      user: userDB,
+      token: JWTsignToken(userDB),
+    };
   }
 }
 

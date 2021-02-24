@@ -1,4 +1,4 @@
-const { hashSync } = require("bcrypt");
+const { hashSync, compareSync } = require("bcrypt");
 
 module.exports = function (sequelize, DataTypes) {
   const User = sequelize.define(
@@ -23,14 +23,6 @@ module.exports = function (sequelize, DataTypes) {
     },
     {
       timestamps: false,
-      instanceMethods: {
-        validPassword(password) {
-          return bcrypt.compareSync(password, this.password);
-        }
-      },
-      defaultScope: {
-        attributes: { exclude: ["password"] },
-      }
     }
   );
 
@@ -47,6 +39,10 @@ module.exports = function (sequelize, DataTypes) {
     var values = Object.assign({}, this.get());
     delete values.password;
     return values;
+  };
+
+  User.prototype.validPassword = function (password) {
+    return compareSync(password, this.password);
   };
 
   return User;

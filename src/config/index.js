@@ -6,4 +6,6 @@ module.exports = {
   APPLICATION_NAME: process.env.APPLICATION_NAME,
   PORT: process.env.PORT,
   DB_CONNECTIONURI: process.env.DB_CONNECTIONURI,
+  JWT_SECRET : process.env.JWT_SECRET,
+  JWT_EXPIRATIONTIME: process.env.JWT_EXPIRATIONTIME
 };
