@@ -38,6 +38,11 @@ class OperationRepository {
     })
   }
 
+  getById(id, userId){
+    const query = {id, userId}
+    return db.Operation.findOne({where: query});
+  }
+
 
 }
 

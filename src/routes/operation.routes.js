@@ -7,6 +7,7 @@ module.exports = function ({ OperationController }) {
   router.post("/", AuthMiddleware, OperationController.createOperation);
   router.get("/", AuthMiddleware, OperationController.getAll);
   router.get("/type/:typeId", AuthMiddleware, OperationController.getAllByOperationType);
+  router.get("/:id", AuthMiddleware, OperationController.getById);
 
   return router;
 };

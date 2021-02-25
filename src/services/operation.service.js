@@ -27,6 +27,11 @@ class OperationService {
       operations,
     };
   }
+
+  async getById(id, userId){
+    const operation = await _operationRepository.getById(id, userId);
+    return {operation};
+  }
 }
 
 module.exports = OperationService;
