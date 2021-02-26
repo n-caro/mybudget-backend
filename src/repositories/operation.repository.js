@@ -43,6 +43,11 @@ class OperationRepository {
     return db.Operation.findOne({where: query});
   }
 
+  deleteById(id, userId){
+    const query = {id, userId}
+    return db.Operation.destroy({where: query});
+  }
+
 
 }
 

@@ -8,6 +8,7 @@ module.exports = function ({ OperationController }) {
   router.get("/", AuthMiddleware, OperationController.getAll);
   router.get("/type/:typeId", AuthMiddleware, OperationController.getAllByOperationType);
   router.get("/:id", AuthMiddleware, OperationController.getById);
+  router.delete("/:id", AuthMiddleware, OperationController.deleteOperation);
 
   return router;
 };

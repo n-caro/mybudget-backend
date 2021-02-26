@@ -32,6 +32,17 @@ class OperationService {
     const operation = await _operationRepository.getById(id, userId);
     return {operation};
   }
+
+  async deleteOperation(id, userId){
+    const operation = await _operationRepository.deleteById(id, userId);
+    if(operation == 1){
+      return {message: "Operation has deleted sucefuly."}
+    } else{
+      let error = new Error("operation not found.");
+      error.status = 404
+      throw error;
+    }
+  }
 }
 
 module.exports = OperationService;
