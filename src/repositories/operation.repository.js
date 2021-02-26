@@ -48,6 +48,11 @@ class OperationRepository {
     return db.Operation.destroy({where: query});
   }
 
+  update(id, userId, queryUpdate){
+    const queryWhere = {id, userId}
+    return db.Operation.update(queryUpdate, {where: queryWhere})
+  }
+
 
 }
 

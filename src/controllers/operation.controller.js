@@ -102,6 +102,23 @@ class OperationController {
       });
     }
   }
+  async updateOperation(req, res) {
+    const { id } = req.params;
+    const userId = req.user.id;
+    const { body } = req;
+    try {
+      const operation = await _operationService.updateOperation(id, userId, body);
+      return res.json(operation);
+    } catch (error) {
+      //TODO: Handle exceptions with middleware
+      const status = error.status || 500;
+      const message = error.message || "Internal server error";
+      return res.status(status).json({
+        status,
+        message,
+      });
+    }
+  }
 }
 
 module.exports = OperationController;

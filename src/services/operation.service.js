@@ -28,19 +28,48 @@ class OperationService {
     };
   }
 
-  async getById(id, userId){
+  async getById(id, userId) {
     const operation = await _operationRepository.getById(id, userId);
-    return {operation};
+    return { operation };
   }
 
-  async deleteOperation(id, userId){
+  async deleteOperation(id, userId) {
     const operation = await _operationRepository.deleteById(id, userId);
-    if(operation == 1){
-      return {message: "Operation has deleted sucefuly."}
-    } else{
+    if (operation == 1) {
+      return { message: "Operation has deleted sucefuly." };
+    } else {
       let error = new Error("operation not found.");
-      error.status = 404
+      error.status = 404;
       throw error;
+    }
+  }
+
+  async updateOperation(id, userId, updateValues) {
+    const operation = await _operationRepository.getById(id, userId);
+    if (!operation) {
+      throw new Error("operation not found.");
+    }
+    const allowedAttributes = [
+      "amount",
+      "dateOperation",
+      "note",
+      "operationCategoryId",
+    ];
+    const queryUpdate = {};
+    allowedAttributes.forEach((key) => {
+      if (updateValues[key]) {
+        queryUpdate[key] = updateValues[key];
+      }
+    });
+    const operationUpdate = await _operationRepository.update(
+      id,
+      userId,
+      queryUpdate
+    );
+    if (operationUpdate == 1) {
+      return await _operationRepository.getById(id, userId);
+    } else {
+      throw new Error("The operation could not be updated.");
     }
   }
 }
