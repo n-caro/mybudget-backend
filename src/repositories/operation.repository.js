@@ -34,7 +34,9 @@ class OperationRepository {
       where: query,
       attributes: [
         [sequelize.fn('sum', sequelize.col('Operation.amount')), 'total']
-      ]
+      ],
+      plain: true,
+      raw : true
     })
   }
 

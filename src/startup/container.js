@@ -3,12 +3,12 @@ const { createContainer, asValue, asClass, asFunction } = require("awilix");
 const config = require("../config");
 const app = require(".");
 // Services
-const { AuthService, OperationService, CategoryService } = require("../services");
+const { AuthService, OperationService, CategoryService, BalanceService } = require("../services");
 // Controllers
-const { AuthController, OperationController, CategoryController } = require("../controllers");
+const { AuthController, OperationController, CategoryController, BalanceController } = require("../controllers");
 // Routes
 const Routes = require("../routes");
-const { AuthRoutes, OperationRoutes, CategoriesRoutes } = require("../routes/index.routes");
+const { AuthRoutes, OperationRoutes, CategoriesRoutes, BalanceRoutes } = require("../routes/index.routes");
 // Repositories
 const { UserRepository, OperationRepository, CategoryRepository } = require("../repositories");
 
@@ -23,19 +23,22 @@ container.register({
   router: asFunction(Routes).singleton(),
   AuthRoutes: asFunction(AuthRoutes).singleton(),
   OperationRoutes: asFunction(OperationRoutes).singleton(),
-  CategoriesRoutes: asFunction(CategoriesRoutes).singleton()
+  CategoriesRoutes: asFunction(CategoriesRoutes).singleton(),
+  BalanceRoutes: asFunction(BalanceRoutes).singleton()
 });
 // Register: Services
 container.register({
   AuthService: asClass(AuthService).singleton(),
   OperationService: asClass(OperationService).singleton(),
-  CategoryService: asClass(CategoryService).singleton()
+  CategoryService: asClass(CategoryService).singleton(),
+  BalanceService: asClass(BalanceService).singleton()
 });
 // Register: Controllers
 container.register({
   AuthController: asClass(AuthController.bind(AuthController)).singleton(),
   OperationController: asClass(OperationController.bind(OperationController)).singleton(),
-  CategoryController: asClass(CategoryController.bind(CategoryController)).singleton()
+  CategoryController: asClass(CategoryController.bind(CategoryController)).singleton(),
+  BalanceController: asClass(BalanceController.bind(BalanceController)).singleton()
 });
 // Register: Repositories
 container.register({
