@@ -1,6 +1,6 @@
 const express = require("express");
 
-module.exports = function ({ AuthRoutes, OperationRoutes }) {
+module.exports = function ({ AuthRoutes, OperationRoutes, CategoriesRoutes }) {
   const router = express.Router();
   const apiRoutes = express.Router();
 
@@ -11,6 +11,7 @@ module.exports = function ({ AuthRoutes, OperationRoutes }) {
   // Routes
   apiRoutes.use("/auth", AuthRoutes);
   apiRoutes.use("/operations", OperationRoutes);
+  apiRoutes.use("/categories", CategoriesRoutes);
   // set base url (example: /api/v1)
   router.use("/api", apiRoutes);
 

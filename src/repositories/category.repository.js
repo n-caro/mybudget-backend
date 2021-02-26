@@ -1,8 +1,11 @@
-const { sequelize } = require("../models");
 const db = require("../models");
 
-class OperationCategoryRepository {
+class CategoryRepository {
   
+  getAll(){
+    return db.OperationCategory.findAll();
+  }
+
   getById(id){
     const query = {id}
     return db.OperationCategory.findOne({where: query});
@@ -10,4 +13,4 @@ class OperationCategoryRepository {
 
 }
 
-module.exports = OperationCategoryRepository;
+module.exports = CategoryRepository;
