@@ -10,7 +10,7 @@ const { AuthController, OperationController } = require("../controllers");
 const Routes = require("../routes");
 const { AuthRoutes, OperationRoutes } = require("../routes/index.routes");
 // Repositories
-const { UserRepository, OperationRepository } = require("../repositories");
+const { UserRepository, OperationRepository, OperationCategoryRepository } = require("../repositories");
 
 // create container
 const container = createContainer();
@@ -38,6 +38,7 @@ container.register({
 container.register({
   UserRepository: asClass(UserRepository).singleton(),
   OperationRepository: asClass(OperationRepository).singleton(),
+  OperationCategoryRepository: asClass(OperationCategoryRepository).singleton()
 });
 
 module.exports = container;

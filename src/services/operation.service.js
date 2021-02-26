@@ -1,7 +1,9 @@
 _operationRepository = null;
+_OperationCategoryRepository = null;
 class OperationService {
-  constructor({ OperationRepository }) {
+  constructor({ OperationRepository, OperationCategoryRepository }) {
     _operationRepository = OperationRepository;
+    _OperationCategoryRepository = OperationCategoryRepository;
   }
 
   async createOperation(operation) {
@@ -61,6 +63,13 @@ class OperationService {
         queryUpdate[key] = updateValues[key];
       }
     });
+    if(queryUpdate["operationCategoryId"]){
+      console.log("HAY CATEGORIA")
+      const category = await _OperationCategoryRepository.getById(queryUpdate["operationCategoryId"]);
+      if(!category || category.operationTypeId != operation.operationTypeId){
+        throw new Error("Category is not valid.");
+      }
+    }
     const operationUpdate = await _operationRepository.update(
       id,
       userId,
