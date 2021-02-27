@@ -1,13 +1,19 @@
 const express = require("express");
+const cors = require("cors");
 
-module.exports = function ({ AuthRoutes, OperationRoutes, CategoriesRoutes, BalanceRoutes }) {
+module.exports = function ({
+  AuthRoutes,
+  OperationRoutes,
+  CategoriesRoutes,
+  BalanceRoutes,
+}) {
   const router = express.Router();
   const apiRoutes = express.Router();
 
   // default middlewares
   apiRoutes.use(express.json()); // for parsing application/json
   apiRoutes.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
+  apiRoutes.use(cors());
   // Routes
   apiRoutes.use("/auth", AuthRoutes);
   apiRoutes.use("/operations", OperationRoutes);
