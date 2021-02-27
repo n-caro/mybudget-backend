@@ -10,36 +10,24 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING(140),
         allowNull: true,
       },
-      operationCategoryId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      operationTypeId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       dateOperation: {
         type: DataTypes.DATE,
         allowNull: false,
-      },
+      }
     },
     {
       timestamps: true,
       createdAt: false,
-      UpdatedAt: "UpdatedAt",
+      UpdatedAt: "updatedAt",
     }
   );
 
   Operation.associate = function (models) {
-    Operation.belongsTo(models.OperationType, {
-      foreignKey: "operationTypeId",
+    Operation.belongsTo(models.Type, {
+      foreignKey: "typeId",
     });
-    Operation.belongsTo(models.OperationCategory, {
-      foreignKey: "operationCategoryId",
+    Operation.belongsTo(models.Category, {
+      foreignKey: "categoryId",
     });
     Operation.belongsTo(models.User, { foreignKey: "userId" });
   };

@@ -21,7 +21,7 @@ class OperationService {
   }
 
   async getAllByOperationType(typeId, userId, limit, page) {
-    const query = { userId, operationTypeId: typeId };
+    const query = { userId, typeId };
     const totals = await _operationRepository.countOperations(query);
     const operations = await _operationRepository.getAll(query, limit, page);
     return {
@@ -55,7 +55,7 @@ class OperationService {
       "amount",
       "dateOperation",
       "note",
-      "operationCategoryId",
+      "categoryId",
     ];
     const queryUpdate = {};
     allowedAttributes.forEach((key) => {
@@ -63,9 +63,9 @@ class OperationService {
         queryUpdate[key] = updateValues[key];
       }
     });
-    if(queryUpdate["operationCategoryId"]){
-      const category = await _CategoryRepository.getById(queryUpdate["operationCategoryId"]);
-      if(!category || category.operationTypeId != operation.operationTypeId){
+    if(queryUpdate["categoryId"]){
+      const category = await _CategoryRepository.getById(queryUpdate["categoryId"]);
+      if(!category || category.typeId != operation.typeId){
         throw new Error("Category is not valid.");
       }
     }

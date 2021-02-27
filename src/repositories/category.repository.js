@@ -3,12 +3,12 @@ const db = require("../models");
 class CategoryRepository {
   
   getAll(){
-    return db.OperationCategory.findAll();
+    return db.Category.findAll();
   }
 
   getById(id){
     const query = {id}
-    return db.OperationCategory.findOne({where: query});
+    return db.Category.findOne({where: query});
   }
 
 }

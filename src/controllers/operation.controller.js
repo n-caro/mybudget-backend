@@ -12,8 +12,8 @@ class OperationController {
         amount: parseFloat(body.amount),
         dateOperation: body.dateOperation,
         note: body.note,
-        operationCategoryId: parseInt(body.operationCategoryId),
-        operationTypeId: parseInt(body.operationTypeId),
+        categoryId: parseInt(body.categoryId),
+        typeId: parseInt(body.typeId),
         userId: req.user.id,
       };
       const operationSaved = await _operationService.createOperation(operation);
