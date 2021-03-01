@@ -14,7 +14,11 @@ class AuthService {
       error.status = 409;
       throw error;
     }
-    return await _userRepository.registerUser(User);
+    const user = await _userRepository.registerUser(User);
+    return {
+      user,
+      token: JWTsignToken(user)
+    }
   }
 
   async signIn(user) {
