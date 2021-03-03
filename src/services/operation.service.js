@@ -1,5 +1,6 @@
 _operationRepository = null;
 _CategoryRepository = null;
+const ErrorResponse = require("../helpers/ErrorResponse");
 class OperationService {
   constructor({ OperationRepository, CategoryRepository }) {
     _operationRepository = OperationRepository;
@@ -38,35 +39,30 @@ class OperationService {
   async deleteOperation(id, userId) {
     const operation = await _operationRepository.deleteById(id, userId);
     if (operation == 1) {
-      return { message: "Operation has deleted sucefuly." };
+      return { message: "La operación ha sido borrada con éxito." };
     } else {
-      let error = new Error("operation not found.");
-      error.status = 404;
-      throw error;
+      throw new ErrorResponse("Operación no encontada", 404);
     }
   }
 
   async updateOperation(id, userId, updateValues) {
     const operation = await _operationRepository.getById(id, userId);
     if (!operation) {
-      throw new Error("operation not found.");
+      throw new ErrorResponse("Operación no encontada", 400);
     }
-    const allowedAttributes = [
-      "amount",
-      "dateOperation",
-      "note",
-      "categoryId",
-    ];
+    const allowedAttributes = ["amount", "dateOperation", "note", "categoryId"];
     const queryUpdate = {};
     allowedAttributes.forEach((key) => {
       if (updateValues[key]) {
         queryUpdate[key] = updateValues[key];
       }
     });
-    if(queryUpdate["categoryId"]){
-      const category = await _CategoryRepository.getById(queryUpdate["categoryId"]);
-      if(!category || category.typeId != operation.typeId){
-        throw new Error("Category is not valid.");
+    if (queryUpdate["categoryId"]) {
+      const category = await _CategoryRepository.getById(
+        queryUpdate["categoryId"]
+      );
+      if (!category || category.typeId != operation.typeId) {
+        throw new ErrorResponse("La categoría ingresada no es válida", 400);
       }
     }
     const operationUpdate = await _operationRepository.update(
@@ -77,7 +73,7 @@ class OperationService {
     if (operationUpdate == 1) {
       return await _operationRepository.getById(id, userId);
     } else {
-      throw new Error("The operation could not be updated.");
+      throw new ErrorResponse("La operación no ha podido ser actualizada", 500);
     }
   }
 }
