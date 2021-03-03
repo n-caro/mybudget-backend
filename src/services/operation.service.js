@@ -39,16 +39,16 @@ class OperationService {
   async deleteOperation(id, userId) {
     const operation = await _operationRepository.deleteById(id, userId);
     if (operation == 1) {
-      return { message: "La operación ha sido borrada con éxito." };
+      return { message: "Operation has been successfully deleted." };
     } else {
-      throw new ErrorResponse("Operación no encontada", 404);
+      throw new ErrorResponse("Operation not found.", 404);
     }
   }
 
   async updateOperation(id, userId, updateValues) {
     const operation = await _operationRepository.getById(id, userId);
     if (!operation) {
-      throw new ErrorResponse("Operación no encontada", 400);
+      throw new ErrorResponse("Operation not found.", 400);
     }
     const allowedAttributes = ["amount", "dateOperation", "note", "categoryId"];
     const queryUpdate = {};
@@ -62,7 +62,7 @@ class OperationService {
         queryUpdate["categoryId"]
       );
       if (!category || category.typeId != operation.typeId) {
-        throw new ErrorResponse("La categoría ingresada no es válida", 400);
+        throw new ErrorResponse("Invalid category.", 400);
       }
     }
     const operationUpdate = await _operationRepository.update(
@@ -73,7 +73,7 @@ class OperationService {
     if (operationUpdate == 1) {
       return await _operationRepository.getById(id, userId);
     } else {
-      throw new ErrorResponse("La operación no ha podido ser actualizada", 500);
+      throw new ErrorResponse("Operation could not be updated.", 500);
     }
   }
 }

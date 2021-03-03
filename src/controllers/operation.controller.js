@@ -21,7 +21,7 @@ class OperationController {
     } catch (error) {
       //TODO: Handle exceptions with middleware
       const status = error.status || 500;
-      const message = error.message || "Error interno del servidor";
+      const message = error.message || "Interval server error.";
       return res.status(status).json({
         status,
         message,
@@ -38,7 +38,7 @@ class OperationController {
     } catch (error) {
       //TODO: Handle exceptions with middleware
       const status = error.status || 500;
-      const message = error.message || "Error interno del servidor";
+      const message = error.message || "Interval server error.";
       return res.status(status).json({
         status,
         message,
@@ -61,7 +61,7 @@ class OperationController {
     } catch (error) {
       //TODO: Handle exceptions with middleware
       const status = error.status || 500;
-      const message = error.message || "Error interno del servidor";
+      const message = error.message || "Interval server error.";
       return res.status(status).json({
         status,
         message,
@@ -78,7 +78,7 @@ class OperationController {
     } catch (error) {
       //TODO: Handle exceptions with middleware
       const status = error.status || 500;
-      const message = error.message || "Error interno del servidor";
+      const message = error.message || "Interval server error.";
       return res.status(status).json({
         status,
         message,
@@ -95,7 +95,7 @@ class OperationController {
     } catch (error) {
       //TODO: Handle exceptions with middleware
       const status = error.status || 500;
-      const message = error.message || "Error interno del servidor";
+      const message = error.message || "Interval server error.";
       return res.status(status).json({
         status,
         message,
@@ -112,7 +112,7 @@ class OperationController {
     } catch (error) {
       //TODO: Handle exceptions with middleware
       const status = error.status || 500;
-      const message = error.message || "Error interno del servidor";
+      const message = error.message || "Interval server error.";
       return res.status(status).json({
         status,
         message,

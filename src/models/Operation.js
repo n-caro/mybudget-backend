@@ -5,6 +5,17 @@ module.exports = function (sequelize, DataTypes) {
       amount: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
+        validate: {
+          isNumeric: {
+            isNumeric: true,
+            msg: "amount must be numeric.",
+          },
+          isGreaterThanZero(value) {
+            if (value <= 0) {
+              throw new Error('amount must be greather tan 0');
+            }
+          }
+        }
       },
       note: {
         type: DataTypes.STRING(140),

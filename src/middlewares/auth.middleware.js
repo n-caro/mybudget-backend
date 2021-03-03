@@ -6,7 +6,7 @@ module.exports = function(req, res, next) {
   if(!token){
     return res.status(400).json({
       status: 400,
-      message: "Token debe ser enviado."
+      message: "Token must be send."
     })
   }
   token = token.replace(/^Bearer\s+/, "");
@@ -14,7 +14,7 @@ module.exports = function(req, res, next) {
     if (err) {
       return res.status(401).json({
         status: 401,
-        message: "Token invalido."
+        message: "Invalid token."
       })
     }
 
