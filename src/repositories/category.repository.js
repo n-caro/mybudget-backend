@@ -3,7 +3,7 @@ const db = require("../models");
 class CategoryRepository {
   
   getAll(){
-    return db.Category.findAll();
+    return db.Category.findAll({attributes:["id", "name", ], include: {model: db.Type, attributes: ["id", "type"]}});
   }
 
   getById(id){

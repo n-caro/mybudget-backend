@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
   );
   Category.associate = function (models) {
     Category.belongsTo(models.Type, {
-      foreignKey: "TypeId",
+      foreignKey: "typeId",
     });
   };
   return Category;
