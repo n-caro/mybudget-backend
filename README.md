@@ -8,9 +8,17 @@ This is the backend (server side) of the myBudget app. To see the frontend (clie
 ![baboon with money 😆](https://media.giphy.com/media/aXThX9ftrHnji/giphy-downsized.gif)
 
 ## Table of contents
-
-[TOC]
-
+- [mybudget-api](#mybudget-api)
+  * [Overview](#overview)
+  * [Table of contents](#table-of-contents)
+  * [1. About API](#1-about-api)
+    + [Database model](#database-model)
+  * [2. Install and usage](#2-install-and-usage)
+      - [Preparing the database](#preparing-the-database)
+      - [Install dependencies](#install-dependencies)
+      - [Setting environment variables](#setting-environment-variables)
+      - [Usage](#usage)
+  * [3. Screenshots](#3-screenshots)
 
 ## 1. About API
 
@@ -69,7 +77,7 @@ Resultados de traducción
 After seeing the message that the application is running, you can see the documentation and use the endpoints from swagger. `http://localhost:/{PORT}/api-docs` (example: http://localhost:4000/api-docs)
 
 
-## 3. Screenshots 📸
+## 3. Screenshots
 
 ![swagger documentation with all endpoints](docs/resources/mybudget-screenshot-swagger.png)
 
