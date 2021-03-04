@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const {AuthMiddleware} = require('../middlewares')
+const { AuthMiddleware } = require("../middlewares");
 
 module.exports = function ({ BalanceController }) {
   const router = Router();

@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("../config/openapi.json");
 
 module.exports = function ({
   AuthRoutes,
@@ -21,7 +23,8 @@ module.exports = function ({
   apiRoutes.use("/balance", BalanceRoutes);
   // set base url (example: /api/v1)
   router.use("/api", apiRoutes);
-
+  router.use("/api-docs", swaggerUi.serve);
+  router.get("/api-docs", swaggerUi.setup(swaggerDocument));
   // Other middlewares:
 
   return router;
