@@ -51,7 +51,7 @@ paths:
     get:
       tags:
         - categories
-      summary: "Retun categories"
+      summary: "Return categories"
       security:
         - Token: []
       responses:
@@ -61,7 +61,7 @@ paths:
       get:
         tags:
           - operations
-        summary: "Retun operations"
+        summary: "Return operations"
         parameters:
         - in: query
           name: limit
