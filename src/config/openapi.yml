@@ -1,0 +1,225 @@
+openapi: "3.0.0"
+info:
+  title: myBudget API
+  description: 'A personal budget management REST API.'
+  contact:
+    email: niicolas.caro@gmail.com
+  version: "1.0.0"
+externalDocs:
+  description: Github Repository
+  url: https://github.com/n-caro/mybudget-backend
+paths:
+  /auth/signup:
+        post:
+          tags:
+            - auth
+          summary: "Create a user"
+          responses:
+            "200":
+              description: OK
+          requestBody:
+            description: User object
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/UserCreate'
+  /auth/signin:
+      post:
+        tags:
+          - auth
+        summary: "User authentication. Return token"
+        responses:
+          "200":
+            description: OK
+        requestBody:
+          description: User login object, username and password
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLogin'
+  /balance:
+    get:
+      tags:
+        - balance
+      summary: "Return balance from user logged"
+      security:
+        - Token: []
+      responses:
+        "200":
+          description: OK
+  /categories:
+    get:
+      tags:
+        - categories
+      summary: "Return categories"
+      security:
+        - Token: []
+      responses:
+        "200":
+          description: OK
+  /operations:
+      get:
+        tags:
+          - operations
+        summary: "Return operations"
+        parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+        - in: query
+          name: page
+          schema:
+            type: integer
+        security:
+          - Token: []
+        responses:
+          "200":
+            description: OK
+      post:
+        tags:
+          - operations
+        summary: "Create operation"
+        security:
+          - Token: []
+        responses:
+          "200":
+            description: OK
+        requestBody:
+          description: Operation object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Operation'
+          required: true
+  /operations/{id}:
+      get:
+        tags:
+          - operations
+        summary: "Return operation"
+        parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        security:
+          - Token: []
+        responses:
+          "200":
+            description: OK
+      delete:
+        tags:
+          - operations
+        summary: "Delete operation"
+        parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        security:
+          - Token: []
+        responses:
+          "200":
+            description: OK
+      patch:
+        tags:
+          - operations
+        summary: "Update operation"
+        parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        security:
+          - Token: []
+        responses:
+          "200":
+            description: OK
+        requestBody:
+          description: Object with attributes to edit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationUpdate'
+  /operations/type/{typeId}:
+      get:
+        tags:
+          - operations
+        summary: "Return operations by type"
+        parameters:
+        - in: path
+          name: typeId
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            type: integer
+        - in: query
+          name: page
+          schema:
+            type: integer  
+        security:
+          - Token: []
+        responses:
+          "200":
+            description: OK
+
+
+components:
+  schemas:
+      Operation:
+        type: object
+        properties:
+          amount:
+            type: number
+            minimum: 0
+          dateOperation:
+            type: string
+            format: date
+          note:
+            type: string
+          categoryId:
+            type: integer
+          typeId:
+            type: integer
+      OperationUpdate:
+        type: object
+        properties:
+          amount:
+            type: number
+            minimum: 0
+          dateOperation:
+            type: string
+            format: date
+          note:
+            type: string
+          categoryId:
+            type: integer
+      UserCreate:
+        type: object
+        properties:
+          name:
+            type: string
+          email:
+            type: string
+            format: email
+          password:
+            type: string
+      UserLogin:
+        type: object
+        properties:
+          email:
+            type: string
+            format: email
+          password:
+            type: string
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
