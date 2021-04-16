@@ -11,10 +11,9 @@ class OperationService {
     return await _operationRepository.createOperation(operation);
   }
 
-  async getAll(userId, limit, page) {
-    const query = { userId };
-    const totals = await _operationRepository.countOperations(query);
-    const operations = await _operationRepository.getAll(query, limit, page);
+  async getAll(userId, limit, page, startDate, endDate) {
+    const totals = await _operationRepository.countOperations(userId, startDate, endDate);
+    const operations = await _operationRepository.getAll(userId, limit, page, startDate, endDate);
     return {
       totals,
       operations,

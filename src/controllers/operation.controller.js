@@ -30,10 +30,10 @@ class OperationController {
   }
 
   async getAll(req, res) {
-    const { limit, page } = req.query;
+    const { limit, page, startDate, endDate } = req.query;
     const userID = req.user.id;
     try {
-      const operations = await _operationService.getAll(userID, limit, page);
+      const operations = await _operationService.getAll(userID, limit, page, startDate, endDate);
       return res.json(operations);
     } catch (error) {
       //TODO: Handle exceptions with middleware

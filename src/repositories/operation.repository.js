@@ -1,15 +1,24 @@
 const db = require("../models");
+const { Op } = require("sequelize");
 
 class OperationRepository {
   createOperation(operation) {
     return db.Operation.create(operation);
   }
 
-  getAll(query, limit = 10, page = 1) {
+  getAll(userId, limit = 10, page = 1, startDate, endDate) {
+    let queryWhere = {
+      userId
+    }
     limit = parseInt(limit);
     const skips = limit * (page - 1);
+    if(startDate && endDate) {
+      queryWhere.dateOperation = {
+        [Op.between] : [startDate, endDate]
+      }
+    }
     return db.Operation.findAll({
-      where: query,
+      where: queryWhere,
       attributes: ["id", "amount", "dateOperation", "note", "updatedAt"],
       limit: limit,
       offset: skips,
@@ -21,7 +30,15 @@ class OperationRepository {
     });
   }
 
-  countOperations(query){
+  countOperations(userId, startDate, endDate){
+    let query = {
+      userId
+    }
+    if(startDate && endDate) {
+      query.dateOperation = {
+        [Op.between] : [startDate, endDate]
+      }
+    }
     return db.Operation.count({
       where: query
     })
