@@ -21,16 +21,6 @@ class OperationService {
     };
   }
 
-  async getAllByOperationType(typeId, userId, limit, page) {
-    const query = { userId, typeId };
-    const totals = await _operationRepository.countOperations(query);
-    const operations = await _operationRepository.getAll(query, limit, page);
-    return {
-      totals,
-      operations,
-    };
-  }
-
   async getById(id, userId) {
     const operation = await _operationRepository.getById(id, userId);
     return { operation };

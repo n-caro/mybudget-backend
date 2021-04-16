@@ -250,48 +250,6 @@
           }
         }
       }
-    },
-    "/operations/type/{typeId}": {
-      "get": {
-        "tags": [
-          "operations"
-        ],
-        "summary": "Return operations by type",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "typeId",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "page",
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Token": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
     }
   },
   "components": {
