@@ -46,29 +46,6 @@ class OperationController {
     }
   }
 
-  async getAllByOperationType(req, res) {
-    const { limit, page } = req.query;
-    const { typeId } = req.params;
-    const userId = req.user.id;
-    try {
-      const operations = await _operationService.getAllByOperationType(
-        typeId,
-        userId,
-        limit,
-        page
-      );
-      return res.json(operations);
-    } catch (error) {
-      //TODO: Handle exceptions with middleware
-      const status = error.status || 500;
-      const message = error.message || "Interval server error.";
-      return res.status(status).json({
-        status,
-        message,
-      });
-    }
-  }
-
   async getById(req, res) {
     const { id } = req.params;
     const userId = req.user.id; 
